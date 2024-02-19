@@ -2025,6 +2025,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1603097672019922814, guid: 0569093672a79c642984286047e984fd, type: 3}
+      propertyPath: coyoteTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1603097672019922814, guid: 0569093672a79c642984286047e984fd, type: 3}
       propertyPath: Ground.m_Bits
       value: 8
       objectReference: {fileID: 0}

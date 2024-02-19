@@ -8,6 +8,10 @@ public class PlayerMovement : MonoBehaviour
     private float horizontal;
     public float speed = 5f;
     public float jumpPower = 7f;
+    private bool canJump = false;
+    private bool isGrounded = false;
+    [SerializeField] private float coyoteTime = 0.5f;
+    private float cTimer;
     private Rigidbody2D rb;
 
 
@@ -30,12 +34,21 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetKeyDown(KeyCode.Space) && IsGounded())
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpPower);
-            Debug.Log("jump work");
-        }
+            if (isGrounded || canJump)
+            {
+                Jump();
+            }
+
             
+        }
+
+        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0.5f)
+        { 
+        rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+        }
+        
         
         
         
@@ -43,13 +56,37 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        IsGrounded();
         rb.velocity = new Vector2(horizontal * speed,rb.velocity.y); 
     }
-    private bool IsGounded()
+    void IsGrounded()
     {
-        Debug.Log("grounded =" + Physics2D.OverlapCircle(groundChecker.position, 0.2f, Ground));
-        return Physics2D.OverlapCircle(groundChecker.position, 0.2f, Ground);
         
+         isGrounded = Physics2D.OverlapCircle(groundChecker.position, 0.2f, Ground);
+        if (isGrounded)
+        {
+            canJump = true;
+            cTimer = coyoteTime;
+        }
+        else
+        {
+            cTimer -= Time.deltaTime;
+        }
+
+        if(cTimer <= 0f)
+        {
+            canJump = false;
+        }
+        
+        
+    }
+
+
+    void Jump()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+        Debug.Log("jump work");
+        canJump = false;
     }
    
 
