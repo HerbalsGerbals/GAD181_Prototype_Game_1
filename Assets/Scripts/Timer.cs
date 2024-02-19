@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    private float targetTime = 10.0f;
+    public float targetTime = 10.0f;
+    [SerializeField] private Slider timerUI;
 
     // Start is called before the first frame update
     void Start()
@@ -17,11 +19,14 @@ public class Timer : MonoBehaviour
     void Update()
     {
         targetTime -= Time.deltaTime;
+        timerUI.value = targetTime;
 
         if (targetTime <= 0.0f)
         {
             timerEnded();
+            
         }
+
     }
     private void timerEnded()
     {

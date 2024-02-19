@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
 
 
-    [SerializeField] private LayerMask ground;
+    [SerializeField] private LayerMask Ground;
     [SerializeField] private Transform groundChecker;
    
 
@@ -29,10 +29,15 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
+
+        if (Input.GetKeyDown(KeyCode.Space) && IsGounded())
         {
-            if (Input.GetButtonDown("Jump") && IsGounded()) 
-                rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+            rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+            Debug.Log("jump work");
         }
+            
+        
+        
         
 
     }
@@ -42,7 +47,9 @@ public class PlayerMovement : MonoBehaviour
     }
     private bool IsGounded()
     {
-        return Physics2D.OverlapCircle(groundChecker.position, 0.2f, ground);
+        Debug.Log("grounded =" + Physics2D.OverlapCircle(groundChecker.position, 0.2f, Ground));
+        return Physics2D.OverlapCircle(groundChecker.position, 0.2f, Ground);
+        
     }
    
 
