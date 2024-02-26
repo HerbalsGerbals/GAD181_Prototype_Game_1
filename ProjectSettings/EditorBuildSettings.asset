@@ -8,10 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level 1.unity
     guid: a17f4c01ddda7844b94120decae90422
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level Prefab (Save as different level when making own).unity
     guid: 9fdfc779937a50c40a6d1d4a56916e9c
   - enabled: 1
     path: Assets/Scenes/Level 2  (James).unity
     guid: 3a2608814930569408445b0ab7039400
+  - enabled: 1
+    path: Assets/Scenes/Level 3 (Emilio).unity
+    guid: 854b73869d4303549adc9075b94fef72
   m_configObjects: {}
